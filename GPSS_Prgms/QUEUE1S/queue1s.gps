@@ -1,0 +1,47 @@
+	SIMULATE
+*Define Ampervariables
+
+	INTEGER	&LIMIT
+	REAL	&IAT,&MEAN,&STDEV,&COUNT
+	LET		&IAT=4.5
+	LET		&MEAN=3.2
+	LET		&STDEV=.6
+	LET		&LIMIT=1000
+
+*Write Input Data to File
+
+	PUTPIC FILE=OUT1,LINES=5,(&IAT,&MEAN,&STDEV,&LIMIT)
+	Mean interarrival time **.** minutes
+	Mean service time **.** minutes
+	Standard deviation of service time **.** minutes
+	Number of customers to be served *****
+
+* GPSS/H Block Section
+
+	GENERATE RVEXPO(1,&IAT) Exponential arrivals
+	QUEUE SYSTIME Begin response time data collection
+	QUEUE LINE Customer joins waiting line
+	SEIZE CHECKOUT Begin checkout at cash register
+	DEPART LINE Customer starting service leaves queue
+	ADVANCE RVNORM(1,&MEAN,&STDEV) Customer's service time
+	RELEASE CHECKOUT Customer leaves checkout area
+	DEPART SYSTIME End response time data collection
+	TEST GE M1,4,TER Is response time GE 4 minutes?
+	BLET &COUNT=&COUNT+1 If so, add 1 to counter
+TER TERMINATE 1
+
+	START &LIMIT Simulate for required number
+
+* Write Customized Output Data to File
+
+	PUTPIC FILE=OUT1,LINES=7,(FR(CHECKOUT)/1000,QM(LINE),_
+	QT(SYSTIME),&COUNT/N(TER),AC1,N(TER))
+	Server utilization .***
+	Maximum line length **
+	Average response time **.** minutes
+	Proportion who spend four minutes .***
+	or more in the system
+	Simulation runlength ****.** minutes
+	Number of departures ****
+
+	END

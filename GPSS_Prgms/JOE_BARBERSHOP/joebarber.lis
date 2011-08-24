@@ -1,0 +1,129 @@
+    Student GPSS/H Release 3.70 (UL221)     24 Aug 2011   19:30:59     File: joebarber.gps
+
+    Line# Stmt#  If Do  Block#  *Loc	Operation	A,B,C,D,E,F,G	Comments  
+ 
+        1     1                 * Download GPSS http://www.wolverinesoftware.com/Downloads/Student/StudentDemo_UG231.exe
+        2     2                 * gpssh joebarber.gps
+        3     3                 * SINGLE-SERVER QUEUING SYSTEM (JOE'S BARBERSHOP)
+        4     4                  
+        5     5                 	SIMULATE		EXECUTE SIMULATION
+        6     6              1  	GENERATE	18,6	CUSTOMERS ARRIVE EVERY 18+-6 MINUTES
+        7     7              2  	ADVANCE	0.5	HANG UP COAT
+        8     8              3  	QUEUE	WAITJOE
+        9     9              4  	SEIZE	JOE	WAIT UNTIL JOE IS AVAILABLE
+       10    10              5  	DEPART WAITJOE
+       11    11              6      ADVANCE	15,3	HAVE THEIR HAIR CUT IN 15+-3 MINUTES
+       12    12              7      RELEASE	JOE	FREE JOE
+       13    13              8      TERMINATE	1	EXIT THE SHOP
+       14    14                     START	100
+       15    15                 	PUTPIC	FILE=OUT,LINES=6,(AC1,FT(JOE),QM(WAITJOE),QT(WAITJOE))
+       16    16                         CUSTOMIZED GPSS/H OUTPUT REPORT FOR SINGLE-SERVER QUEUING SYSTEM (JOE'S BARBERSHOP)
+       17    17                         -----------------------------------------------------------------------------------
+       18    18                         Simulation runlength    ****.**** minutes
+       19    19                         Average serving time    **.*** minutes
+       20    20                         Maximum queue length    *
+       21    21                         Average response time   *.** minutes  
+       22    22                 	END
+
+Entity Dictionary (in ascending order by entity number; "*" => value conflict.)
+
+       Facilities: 1=JOE
+
+           Queues: 1=WAITJOE
+
+            Files: 1=OUT
+
+Symbol   Value   EQU Defns  Context      References by Statement Number
+ 
+JOE          1              Facility         9    12    15
+ 
+WAITJOE      1              Queue            8    10    15    15
+ 
+OUT          1              File            15
+
+
+
+Storage Requirements (Bytes)
+
+Compiled Code:      372
+Compiled Data:       40
+Miscellaneous:      363
+Entities:           424
+Common:           10000
+-----------------------
+Total:            11199
+
+
+
+GPSS/H Model Size:
+
+Control Statements      4
+Blocks                  8
+
+
+
+Simulation begins.
+
+Relative Clock: 1780.6667   Absolute Clock: 1780.6667
+
+
+
+Block Current     Total  
+1                   101 
+2                   101 
+3           1       101 
+4                   100 
+5                   100 
+6                   100 
+7                   100 
+8                   100 
+
+
+
+          --Avg-Util-During--                                                               
+Facility  Total  Avail  Unavl     Entries    Average   Current  Percent  Seizing  Preempting
+           Time   Time   Time               Time/Xact   Status   Avail     Xact      Xact   
+     JOE  0.851                       100      15.149    AVAIL                  
+
+
+
+   Queue     Maximum      Average       Total        Zero     Percent      Average      $Average     Qtable     Current
+            Contents     Contents      Entries     Entries     Zeros      Time/Unit    Time/Unit     Number    Contents
+ WAITJOE           1        0.062         101          60       59.4         1.101         2.712                      1
+
+
+
+  Random    Antithetic     Initial     Current      Sample   Chi-Square
+  Stream      Variates    Position    Position       Count   Uniformity
+       1           OFF      100000      100202         202      0.70
+
+
+
+Status of Common Storage
+
+    9608 bytes available
+     392 in use
+     504 used (max)
+
+Simulation complete.  Absolute Clock: 1780.6667
+
+
+
+Total Block Executions: 803
+
+Blocks / second:        6063805
+
+Microseconds / Block:   0.16
+
+
+
+Elapsed Time Used (Sec)
+ 
+Pass1:           0.00
+Sym/Xref         0.00
+Pass2:           0.00
+Load/Ctrl:       0.00
+Execution:       0.00
+Output:          0.00
+---------------------
+Total:           0.00

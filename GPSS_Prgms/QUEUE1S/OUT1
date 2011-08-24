@@ -1,0 +1,12 @@
+        Mean interarrival time  4.50 minutes
+        Mean service time  3.20 minutes
+        Standard deviation of service time  0.60 minutes
+        Number of customers to be served  1000
+ 
+        Server utilization 0.676
+        Maximum line length  7
+        Average response time  6.33 minutes
+        Proportion who spend four minutes 0.646
+        or more in the system
+        Simulation runlength 4767.27 minutes
+        Number of departures 1000

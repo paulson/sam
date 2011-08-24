@@ -1,0 +1,118 @@
+    Student GPSS/H Release 3.70 (UL221)     16 Aug 2011   22:42:58     File: test.gps
+
+    Line# Stmt#  If Do  Block#  *Loc	Operation	A,B,C,D,E,F,G	Comments  
+ 
+        1     1                 	SIMULATE
+        2     2              1  	GENERATE	RVEXPO(1,1.0)
+        3     3              2  	QUEUE	QUEUE
+        4     4              3  	SEIZE	SERVER
+        5     5              4  	DEPART	QUEUE
+        6     6              5  	ADVANCE	RVEXPO(2,0.5)
+        7     7              6  	RELEASE	SERVER
+        8     8              7  	TERMINATE	1
+        9     9                 	START	1000
+       10    10                 	END
+
+Entity Dictionary (in ascending order by entity number; "*" => value conflict.)
+
+       Facilities: 1=SERVER
+
+           Queues: 1=QUEUE
+
+   Random Numbers: 1               2
+
+Symbol   Value   EQU Defns  Context      References by Statement Number
+ 
+SERVER       1              Facility         4     7
+ 
+QUEUE        1              Queue            3     5
+ 
+1            1              Random Nmbr      2
+2            2              Random Nmbr      6
+
+
+
+Storage Requirements (Bytes)
+
+Compiled Code:      268
+Compiled Data:       40
+Miscellaneous:        0
+Entities:           456
+Common:           10000
+-----------------------
+Total:            10764
+
+
+
+GPSS/H Model Size:
+
+Control Statements      3
+Blocks                  7
+
+
+
+Simulation begins.
+
+Relative Clock: 1014.9255   Absolute Clock: 1014.9255
+
+
+
+Block Current     Total  
+1                  1000 
+2                  1000 
+3                  1000 
+4                  1000 
+5                  1000 
+6                  1000 
+7                  1000 
+
+
+
+          --Avg-Util-During--                                                               
+Facility  Total  Avail  Unavl     Entries    Average   Current  Percent  Seizing  Preempting
+           Time   Time   Time               Time/Xact   Status   Avail     Xact      Xact   
+  SERVER  0.516                      1000       0.524    AVAIL                  
+
+
+
+   Queue     Maximum      Average       Total        Zero     Percent      Average      $Average     Qtable     Current
+            Contents     Contents      Entries     Entries     Zeros      Time/Unit    Time/Unit     Number    Contents
+   QUEUE           8        0.605        1000         454       45.4         0.614         1.124                      0
+
+
+
+  Random    Antithetic     Initial     Current      Sample   Chi-Square
+  Stream      Variates    Position    Position       Count   Uniformity
+       1           OFF      100000      101001        1001      0.71
+       2           OFF      200000      201000        1000      0.69
+
+
+
+Status of Common Storage
+
+    9736 bytes available
+     264 in use
+    1400 used (max)
+
+Simulation complete.  Absolute Clock: 1014.9255
+
+
+
+Total Block Executions: 7000
+
+Blocks / second:        4635611
+
+Microseconds / Block:   0.22
+
+
+
+Elapsed Time Used (Sec)
+ 
+Pass1:           0.00
+Sym/Xref         0.00
+Pass2:           0.00
+Load/Ctrl:       0.00
+Execution:       0.00
+Output:          0.00
+---------------------
+Total:           0.00

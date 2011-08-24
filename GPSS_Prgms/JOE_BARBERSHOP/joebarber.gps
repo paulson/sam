@@ -1,0 +1,22 @@
+* Download GPSS http://www.wolverinesoftware.com/Downloads/Student/StudentDemo_UG231.exe
+* gpssh joebarber.gps
+* SINGLE-SERVER QUEUING SYSTEM (JOE'S BARBERSHOP)
+
+	SIMULATE		EXECUTE SIMULATION
+	GENERATE	18,6	CUSTOMERS ARRIVE EVERY 18+-6 MINUTES
+	ADVANCE	0.5	HANG UP COAT
+	QUEUE	WAITJOE
+	SEIZE	JOE	WAIT UNTIL JOE IS AVAILABLE
+	DEPART WAITJOE
+    ADVANCE	15,3	HAVE THEIR HAIR CUT IN 15+-3 MINUTES
+    RELEASE	JOE	FREE JOE
+    TERMINATE	1	EXIT THE SHOP
+    START	100
+	PUTPIC	FILE=OUT,LINES=6,(AC1,FT(JOE),QM(WAITJOE),QT(WAITJOE))
+	CUSTOMIZED GPSS/H OUTPUT REPORT FOR SINGLE-SERVER QUEUING SYSTEM (JOE'S BARBERSHOP)
+	-----------------------------------------------------------------------------------
+	Simulation runlength	****.**** minutes
+	Average serving time	**.*** minutes
+	Maximum queue length	*
+	Average response time	*.** minutes  
+	END

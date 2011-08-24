@@ -1,0 +1,175 @@
+    Student GPSS/H Release 3.70 (UL221)     24 Aug 2011   19:33:05     File: queue1s.gps
+
+    Line# Stmt#  If Do  Block#  *Loc	Operation	A,B,C,D,E,F,G	Comments  
+ 
+        1     1                 	SIMULATE
+        2     2                 *Define Ampervariables
+        3     3                  
+        4     4                 	INTEGER	&LIMIT
+        5     5                 	REAL	&IAT,&MEAN,&STDEV,&COUNT
+        6     6                 	LET		&IAT=4.5
+        7     7                 	LET		&MEAN=3.2
+        8     8                 	LET		&STDEV=.6
+        9     9                 	LET		&LIMIT=1000
+       10    10                  
+       11    11                 *Write Input Data to File
+       12    12                  
+       13    13                 	PUTPIC FILE=OUT1,LINES=5,(&IAT,&MEAN,&STDEV,&LIMIT)
+       14    14                         Mean interarrival time **.** minutes
+       15    15                         Mean service time **.** minutes
+       16    16                         Standard deviation of service time **.** minutes
+       17    17                         Number of customers to be served *****
+       18    18                  
+       19    19                 * GPSS/H Block Section
+       20    20                  
+       21    21              1  	GENERATE RVEXPO(1,&IAT) Exponential arrivals
+       22    22              2  	QUEUE SYSTIME Begin response time data collection
+       23    23              3  	QUEUE LINE Customer joins waiting line
+       24    24              4  	SEIZE CHECKOUT Begin checkout at cash register
+       25    25              5  	DEPART LINE Customer starting service leaves queue
+       26    26              6  	ADVANCE RVNORM(1,&MEAN,&STDEV) Customer's service time
+       27    27              7  	RELEASE CHECKOUT Customer leaves checkout area
+       28    28              8  	DEPART SYSTIME End response time data collection
+       29    29              9  	TEST GE M1,4,TER Is response time GE 4 minutes?
+       30    30             10  	BLET &COUNT=&COUNT+1 If so, add 1 to counter
+       31    31             11  TER TERMINATE 1
+       32    32                  
+       33    33                 	START &LIMIT Simulate for required number
+       34    34                  
+       35    35                 * Write Customized Output Data to File
+       36    36                  
+       37    37                 	PUTPIC FILE=OUT1,LINES=7,(FR(CHECKOUT)/1000,QM(LINE),_
+       38    38                 	QT(SYSTIME),&COUNT/N(TER),AC1,N(TER))
+       39    39                         Server utilization .***
+       40    40                         Maximum line length **
+       41    41                         Average response time **.** minutes
+       42    42                         Proportion who spend four minutes .***
+       43    43                         or more in the system
+       44    44                         Simulation runlength ****.** minutes
+       45    45                         Number of departures ****
+       46    46                  
+       47    47                 	END
+
+Entity Dictionary (in ascending order by entity number; "*" => value conflict.)
+
+       Facilities: 1=CHECKOUT
+
+           Queues: 1=SYSTIME       2=LINE
+
+   Random Numbers: 1
+
+    Integer &Vars: 1=LIMIT
+
+       Real &Vars: 1=COUNT         2=IAT           3=MEAN          4=STDEV
+
+            Files: 1=OUT1
+
+Symbol   Value   EQU Defns  Context      References by Statement Number
+ 
+TER         11          31  Block           29    38    38
+ 
+CHECKOUT     1              Facility        24    27    37
+ 
+LINE         2              Queue           23    25    37
+SYSTIME      1              Queue           22    28    38
+ 
+1            1              Random Nmbr     21    26
+ 
+LIMIT        1           4  Integer          9    13    33
+ 
+COUNT        1           5  Real            30    30    38
+IAT          2           5  Real             6    13    21
+MEAN         3           5  Real             7    13    26
+STDEV        4           5  Real             8    13    26
+ 
+OUT1         1              File            13    37
+
+
+
+Storage Requirements (Bytes)
+
+Compiled Code:      834
+Compiled Data:       40
+Miscellaneous:      456
+Entities:           512
+Common:           10000
+-----------------------
+Total:            11842
+
+
+
+GPSS/H Model Size:
+
+Control Statements      9
+Blocks                 11
+
+
+
+Simulation begins.
+
+Relative Clock: 4767.2740   Absolute Clock: 4767.2740
+
+
+
+Block Current     Total  Block Current     Total  
+1                  1003  TER                1000 
+2                  1003 
+3           3      1003 
+4                  1000 
+5                  1000 
+6                  1000 
+7                  1000 
+8                  1000 
+9                  1000 
+10                  646 
+
+
+
+          --Avg-Util-During--                                                               
+Facility  Total  Avail  Unavl     Entries    Average   Current  Percent  Seizing  Preempting
+           Time   Time   Time               Time/Xact   Status   Avail     Xact      Xact   
+CHECKOUT  0.676                      1000       3.224    AVAIL                  
+
+
+
+   Queue     Maximum      Average       Total        Zero     Percent      Average      $Average     Qtable     Current
+            Contents     Contents      Entries     Entries     Zeros      Time/Unit    Time/Unit     Number    Contents
+ SYSTIME           8        1.331        1003           0                    6.325         6.325                      3
+    LINE           7        0.655        1003         334       33.3         3.111         4.665                      3
+
+
+
+  Random    Antithetic     Initial     Current      Sample   Chi-Square
+  Stream      Variates    Position    Position       Count   Uniformity
+       1           OFF      100000      103004        3004      0.83
+
+
+
+Status of Common Storage
+
+    9304 bytes available
+     696 in use
+    1400 used (max)
+
+Simulation complete.  Absolute Clock: 4767.2740
+
+
+
+Total Block Executions: 10655
+
+Blocks / second:        4245159
+
+Microseconds / Block:   0.24
+
+
+
+Elapsed Time Used (Sec)
+ 
+Pass1:           0.00
+Sym/Xref         0.00
+Pass2:           0.00
+Load/Ctrl:       0.00
+Execution:       0.00
+Output:          0.00
+---------------------
+Total:           0.01
